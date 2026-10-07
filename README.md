@@ -35,17 +35,20 @@ Never put an image in `art-src/` that isn't logged as approved.
 
 ## Deploy (Cloudflare Pages, free plan)
 
-The site is static (`dist/`), uploaded straight from this machine: no Git connection needed.
+The site is static (`dist/`), hosted as a Cloudflare **Pages** project named **dockdrop** (`wrangler.jsonc`). Use Pages, not a Worker: a Worker's custom domain needs the domain's DNS on Cloudflare, and dockdrop.in's DNS stays at GoDaddy.
 
-1. Fill `VITE_WHATSAPP_NUMBER` (and analytics IDs later) in `.env`. They are baked in at build time, so rebuild after any change.
-2. One time: `npx wrangler login` (opens the browser to sign in to Cloudflare).
-3. `npm run deploy`: builds, then uploads `dist/` to the Pages project **dockdrop** (first run creates it). The site goes live at `https://dockdrop.pages.dev`.
-4. Custom domain (founder's choice: DNS stays at GoDaddy, the site lives on **www**):
-   - Cloudflare dashboard → Workers & Pages → **dockdrop** → Custom domains → **Set up a domain** → `www.dockdrop.in`. Cloudflare shows a CNAME target (`dockdrop.pages.dev`).
+1. **Create the project:** Cloudflare dashboard → Workers & Pages → **Create** → **Pages** tab → **Connect to Git** → pick the repo.
+   - Framework preset: Vite. Build command: `npm run build`. Build output directory: `dist`. No deploy command (Pages deploys the output itself).
+   - **Environment variables (Production):** `VITE_WHATSAPP_NUMBER` (and analytics IDs later). `.env` is git-ignored, so the build server never sees it; values are baked in at build time, so redeploy after changing them.
+   - The first build publishes `https://dockdrop.pages.dev` (or the name Cloudflare assigns if taken).
+   - If a **Worker** named dockdrop was created by mistake (its builds fail with "Authentication error [code: 10000]" on `wrangler pages deploy`), delete it: Worker → Settings → Delete.
+2. **From this machine instead (optional):** fill `.env`, run `npx wrangler login` once, then `npm run deploy`.
+3. **Custom domain** (DNS stays at GoDaddy, the site lives on **www**):
+   - Pages project → **Custom domains** → **Set up a custom domain** → `www.dockdrop.in`. Cloudflare shows a CNAME target (`dockdrop.pages.dev`).
    - GoDaddy → dockdrop.in → DNS → **Add record**: type `CNAME`, name `www`, value `dockdrop.pages.dev`, TTL 1 hour. If a `www` record already exists, edit it instead (don't touch `admin` or any other record).
-   - Back in Cloudflare, wait until the domain shows **Active** (SSL certificate issued; usually minutes, up to a day).
-   - GoDaddy → dockdrop.in → **Forwarding** → forward the domain to `https://www.dockdrop.in`, type **Permanent (301)**, "Forward only". Check that `http://dockdrop.in` and `https://dockdrop.in` both land on www.
+   - Back in Cloudflare, wait until the domain shows **Active** (SSL issued; usually minutes, up to a day).
+   - GoDaddy → dockdrop.in → **Forwarding** → forward to `https://www.dockdrop.in`, **Permanent (301)**, "Forward only". Check that `http://dockdrop.in` and `https://dockdrop.in` both land on www.
    - Canonical URLs, sitemap, robots and structured data already point at `https://www.dockdrop.in/`.
-5. `public/_headers` sets long-term caching for `/assets/*` and `/art/*` plus basic security headers. Unknown paths fall back to `index.html` (Pages' default for a site without a 404 page).
+4. `public/_headers` sets long-term caching for `/assets/*` and `/art/*` plus basic security headers. Unknown paths fall back to `index.html` (Pages' default for a site without a 404 page).
 
 Before launch, run through Part 4 of the build guide (native Malayalam review of `src/content/copy.js`, real founder photo, Terms page, a real-phone test on mobile data).

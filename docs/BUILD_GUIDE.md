@@ -246,7 +246,7 @@ DockDrop is a van-sales app for small wholesale distributors in Kerala (1–3 va
 - **sharp** (dev dependency, asset script)
 - No Lenis, no router library (a tiny path switch for `/lab`)
 - Fonts (Google Fonts): **Sora** 600/700, **Inter** 400/500/600, **Noto Sans Malayalam** 500/600/700, **Kalam** 400 (handwriting on the bill book)
-- Hosting: ~~Vercel~~ **Cloudflare Pages, free plan (founder, 2026-10-07)**: `wrangler.jsonc`, `public/_headers`, `npm run deploy` (direct upload, no Git). Domain dockdrop.in (registered at GoDaddy; DNS stays there): the site is served on **www.dockdrop.in** (GoDaddy CNAME → `dockdrop.pages.dev`), and the bare domain forwards to it (301); canonical URLs use www. Where later checklists say Vercel / `vercel.json`, read Cloudflare Pages / `_headers`.
+- Hosting: ~~Vercel~~ **Cloudflare Pages, free plan (founder, 2026-10-07)**: Pages project `dockdrop` connected to Git (build `npm run build`, output `dist`, no deploy command; `VITE_*` as Pages environment variables), `wrangler.jsonc`, `public/_headers`. Not a Worker: Worker custom domains need Cloudflare DNS. Domain dockdrop.in (registered at GoDaddy; DNS stays there): the site is served on **www.dockdrop.in** (GoDaddy CNAME `www` → `dockdrop.pages.dev`), and the bare domain forwards to it (301); canonical URLs use www. Where later checklists say Vercel / `vercel.json`, read Cloudflare Pages / `_headers`.
 
 **Ownership rule: two libraries never animate the same element.**
 

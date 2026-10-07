@@ -1,6 +1,7 @@
-// Cloudflare Pages project (free plan). Deploy with `npm run deploy` after `npx wrangler login`.
+// Cloudflare Pages project (free plan). Git builds: build command `npm run build`, output `dist`,
+// no deploy command. From this machine: `npx wrangler login` once, then `npm run deploy`.
 {
   "name": "dockdrop",
   "pages_build_output_dir": "./dist",
-  "compatibility_date": "2026-10-07"
+  "compatibility_date": "2026-10-01"
 }
