@@ -1,7 +1,11 @@
-// Cloudflare Pages project (free plan). Git builds: build command `npm run build`, output `dist`,
-// no deploy command. From this machine: `npx wrangler login` once, then `npm run deploy`.
+// Cloudflare Worker serving the static site from ./dist (free plan, no server code).
+// Cloudflare Git builds: build command `npm run build`, deploy command `npx wrangler deploy`.
+// The name must match the Worker in the dashboard.
 {
-  "name": "dockdrop",
-  "pages_build_output_dir": "./dist",
-  "compatibility_date": "2026-10-01"
+  "name": "dockdrop-website",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
 }

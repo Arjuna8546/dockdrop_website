@@ -11,7 +11,7 @@
     "brand": "node scripts/build-brand.mjs",
     "art": "node scripts/build-art.mjs",
     "og": "node scripts/build-og.mjs",
-    "deploy": "npm run build && npx wrangler pages deploy"
+    "deploy": "npm run build && npx wrangler deploy"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

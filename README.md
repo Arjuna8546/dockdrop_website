@@ -33,22 +33,16 @@ Never put an image in `art-src/` that isn't logged as approved.
 | `VITE_WHATSAPP_NUMBER` | Every WhatsApp button and the free-trial button (international format, digits only, e.g. `919400000000`). |
 | `VITE_GA_ID`, `VITE_GTM_ID`, `VITE_META_PIXEL_ID` | Optional analytics. Nothing loads while empty. Events: `story_stage_view`, `story_complete`, `skip_story`, `whatsapp_click`, `trial_click`, `language_switch`. |
 
-## Deploy (Cloudflare Pages, free plan)
+## Deploy (Cloudflare Worker with static assets, free plan)
 
-The site is static (`dist/`), hosted as a Cloudflare **Pages** project named **dockdrop** (`wrangler.jsonc`). Use Pages, not a Worker: a Worker's custom domain needs the domain's DNS on Cloudflare, and dockdrop.in's DNS stays at GoDaddy.
+The site is static (`dist/`), served by the Cloudflare Worker **dockdrop-website** (`wrangler.jsonc`: assets from `./dist`, unknown paths fall back to `index.html`, no server code). The Worker's name in the dashboard must match `"name"` in `wrangler.jsonc`.
 
-1. **Create the project:** Cloudflare dashboard → Workers & Pages → **Create** → **Pages** tab → **Connect to Git** → pick the repo.
-   - Framework preset: Vite. Build command: `npm run build`. Build output directory: `dist`. No deploy command (Pages deploys the output itself).
-   - **Environment variables (Production):** `VITE_WHATSAPP_NUMBER` (and analytics IDs later). `.env` is git-ignored, so the build server never sees it; values are baked in at build time, so redeploy after changing them.
-   - The first build publishes `https://dockdrop.pages.dev` (or the name Cloudflare assigns if taken).
-   - If a **Worker** named dockdrop was created by mistake (its builds fail with "Authentication error [code: 10000]" on `wrangler pages deploy`), delete it: Worker → Settings → Delete.
-2. **From this machine instead (optional):** fill `.env`, run `npx wrangler login` once, then `npm run deploy`.
-3. **Custom domain** (DNS stays at GoDaddy, the site lives on **www**):
-   - Pages project → **Custom domains** → **Set up a custom domain** → `www.dockdrop.in`. Cloudflare shows a CNAME target (`dockdrop.pages.dev`).
-   - GoDaddy → dockdrop.in → DNS → **Add record**: type `CNAME`, name `www`, value `dockdrop.pages.dev`, TTL 1 hour. If a `www` record already exists, edit it instead (don't touch `admin` or any other record).
-   - Back in Cloudflare, wait until the domain shows **Active** (SSL issued; usually minutes, up to a day).
-   - GoDaddy → dockdrop.in → **Forwarding** → forward to `https://www.dockdrop.in`, **Permanent (301)**, "Forward only". Check that `http://dockdrop.in` and `https://dockdrop.in` both land on www.
-   - Canonical URLs, sitemap, robots and structured data already point at `https://www.dockdrop.in/`.
-4. `public/_headers` sets long-term caching for `/assets/*` and `/art/*` plus basic security headers. Unknown paths fall back to `index.html` (Pages' default for a site without a 404 page).
+1. **Cloudflare Git builds** (Worker → Settings → Build): build command `npm run build`, deploy command `npx wrangler deploy` (not `wrangler pages deploy`: the Worker's build token cannot deploy Pages projects).
+2. **Build variables** (same page): add `VITE_WHATSAPP_NUMBER` (and analytics IDs later). `.env` is git-ignored, so the build server never sees it; values are baked in at build time, so redeploy after changing them.
+3. Every push to the production branch rebuilds and publishes at `https://dockdrop-website.<your-subdomain>.workers.dev`.
+4. **From this machine instead (optional):** fill `.env`, `npx wrangler login` once, then `npm run deploy`.
+5. **Custom domain:** a Worker's custom domain needs dockdrop.in's DNS on Cloudflare (free plan): Cloudflare → **Add a domain** → dockdrop.in → review the imported DNS records and make sure **every** existing record is there (e.g. `admin`, mail) → change the nameservers at GoDaddy to the two Cloudflare shows → when the zone is Active: Worker → Settings → Domains & Routes → **Add** → Custom domain → `www.dockdrop.in` (and `dockdrop.in`, plus a redirect rule `dockdrop.in/*` → `https://www.dockdrop.in/$1`, 301). A plain GoDaddy CNAME to `workers.dev` does **not** work for Workers.
+   - Canonical URLs, sitemap, robots and structured data point at `https://www.dockdrop.in/`.
+6. `public/_headers` sets long-term caching for `/assets/*` and `/art/*` plus basic security headers.
 
 Before launch, run through Part 4 of the build guide (native Malayalam review of `src/content/copy.js`, real founder photo, Terms page, a real-phone test on mobile data).
