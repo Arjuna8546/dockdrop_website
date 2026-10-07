@@ -1,0 +1,6 @@
+// Cloudflare Pages project (free plan). Deploy with `npm run deploy` after `npx wrangler login`.
+{
+  "name": "dockdrop",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-10-07"
+}

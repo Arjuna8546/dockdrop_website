@@ -1,0 +1,22 @@
+{
+  "bare": {
+    "left": 6.25,
+    "top": 2.697,
+    "width": 87.812,
+    "height": 94.71,
+    "radius": 12.1,
+    "rot": -0.0,
+    "strip": 5.75,
+    "aspect": 0.4617
+  },
+  "hand": {
+    "left": 13.131,
+    "top": 8.962,
+    "width": 20.908,
+    "height": 54.422,
+    "radius": 7.75,
+    "rot": 0.35,
+    "strip": 4.61,
+    "aspect": 0.4588
+  }
+}

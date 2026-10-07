@@ -1,0 +1,122 @@
+{
+  "photos/a1-hand-writing-billbook": {
+    "w": 535,
+    "h": 359,
+    "kb2x": 51,
+    "kb1x": 23
+  },
+  "photos/a2-van-rear-loading": {
+    "w": 563,
+    "h": 800,
+    "kb2x": 89,
+    "kb1x": 36
+  },
+  "photos/a3-fruit-shop-kerala": {
+    "w": 800,
+    "h": 778,
+    "kb2x": 243,
+    "kb1x": 88
+  },
+  "photos/a3-pettikada-kiosk": {
+    "w": 515,
+    "h": 308,
+    "kb2x": 37,
+    "kb1x": 18
+  },
+  "photos/a4-receipts-pile": {
+    "w": 800,
+    "h": 457,
+    "kb2x": 51,
+    "kb1x": 23
+  },
+  "photos/b1-hand-phone": {
+    "w": 800,
+    "h": 670,
+    "kb2x": 126,
+    "kb1x": 48
+  },
+  "photos/b2-van-topdown-loading": {
+    "w": 700,
+    "h": 800,
+    "kb2x": 107,
+    "kb1x": 50
+  },
+  "photos/b3-shop-snack-counter": {
+    "w": 800,
+    "h": 563,
+    "kb2x": 191,
+    "kb1x": 65
+  },
+  "photos/phone-frame": {
+    "w": 399,
+    "h": 800,
+    "kb2x": 36,
+    "kb1x": 14
+  },
+  "photos/t-owner-head-in-hands": {
+    "w": 698,
+    "h": 800,
+    "kb2x": 135,
+    "kb1x": 55
+  },
+  "photos/t-paper-folder": {
+    "w": 506,
+    "h": 800,
+    "kb2x": 68,
+    "kb1x": 30
+  },
+  "photos/van-box-truck-side": {
+    "w": 622,
+    "h": 343,
+    "kb2x": 29,
+    "kb1x": 17
+  },
+  "screens/b1-dashboard-en": {
+    "w": 390,
+    "h": 804,
+    "kb2x": 59,
+    "kb1x": 25
+  },
+  "screens/b1-dashboard-ml": {
+    "w": 390,
+    "h": 804,
+    "kb2x": 64,
+    "kb1x": 26
+  },
+  "screens/b2-assign-en": {
+    "w": 390,
+    "h": 804,
+    "kb2x": 48,
+    "kb1x": 20
+  },
+  "screens/b2-assign-ml": {
+    "w": 390,
+    "h": 804,
+    "kb2x": 67,
+    "kb1x": 26
+  },
+  "screens/b4-money-en": {
+    "w": 390,
+    "h": 804,
+    "kb2x": 72,
+    "kb1x": 29
+  },
+  "screens/b4-money-ml": {
+    "w": 390,
+    "h": 804,
+    "kb2x": 84,
+    "kb1x": 33
+  },
+  "screens/b4-reports-en": {
+    "w": 390,
+    "h": 804,
+    "kb2x": 53,
+    "kb1x": 21
+  },
+  "screens/b4-reports-ml": {
+    "w": 390,
+    "h": 804,
+    "kb2x": 59,
+    "kb1x": 23
+  }
+}
